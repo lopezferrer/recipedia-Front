@@ -1,6 +1,20 @@
 import React, {Component} from 'react';
 import './App.css';
-import Recipe from './Component/Recipe'
+
+
+//------------------------------------//
+// From exemplo
+//------------------------------------//
+
+import Navbar from './Component/Navbar';
+import { BrowserRouter as Router, Routes, Route}
+from 'react-router-dom';
+import Home from './pages';
+import About from './pages/about';
+import Blogs from './pages/blogs';
+
+import Contact from './pages/contact';
+//-------------------------------------//
 
 
 class App extends Component {
@@ -42,31 +56,17 @@ this.setState({
 
 render() {
     return (
-      <div>
-      
-        {/* form for query */}
-<form onSubmit={this.handleSubmit}>
-    <label htmlFor="queryDetail">Recipe</label>
-        <input
-          id='queryDetail'
-          type='text'
-          value={this.state.queryDetail}
-          onChange={this.handleChange}
-          />
-          <input
-            type='submit'
-            value='Find Recipes'
-            />
-</form>
-            <a href={this.state.searchURL}>{this.state.searchURL}</a>
-            
-                      {this.state.recipes&&
+      <Router>
+      <Navbar />
+      <Routes>
+          <Route exact path='/'  element={<Home />} />
+          <Route path='/recipes' element={<About/>} />
+          <Route path='/contact' element={<Contact/>} />
+          <Route path='/blogs' element={<Blogs/>} />
+          </Routes>
+      </Router>
 
-          this.state.recipes.meals.map((data,i)=>
-          <Recipe  recipe={data} key={i}/>
-          )
-          }
-</div>
+
    )
 
   }
